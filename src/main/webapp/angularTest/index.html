@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="myAppName">
 <head>
 	<meta charset ="UTF-8">
 	<title>TODO App Demo</title>
@@ -8,13 +8,13 @@
 	
 	<script src="../js/angular.js"></script>
 	<script src="app.js"></script>
-
+	
 </head>
 <body class="well" ng-controller="todoCtrl">
 	<h1>{{appName}}</h1>
 	
-	<p>전체할일 <strong>2</strong>개 / 남은 할일은 <strong>1</strong> 개
-	[ <a href="">보관하기</a> ]</p>
+	<p>전체할일 <strong>{{todoList.length}}</strong>개 / 남은 할일은 <strong>{{remain()}}</strong> 개
+	[ <a href="" ng-click="archive()">보관하기</a> ]</p>
 	
 	<ul class="list-unstyled">
 		<li ng-repeat="todo in todoList" class="checkbox">
