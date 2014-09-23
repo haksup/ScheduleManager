@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="myAppName">
+<head>
+	<meta charset="UTF-8">
+	<script src="../js/angular.js"></script>
+	<script type="text/javascript">
+	
+	var myApp = angular.module('myAppName', []);
+	myApp.directive('hello', function(){
+		return function(scope, iElement, iAttrs, controller){
+			iElement.html("<h1>hello " + iAttrs.name + "<h1>")
+		};
+	});
+// 	myApp.controller('mainCtrl', function($scope) {
+// 		$scope.broadcast = function(noticeMsg){
+// 			$scope.$broadcast("chat:noticeMsg", noticeMsg);
+// 			$scope.noticeMsg = "";
+// 		};
+// 	});
+	
+	</script>
+</head>
+<body>
+	<div hello name="angularJS5"></div>
+</body>
+</html> 
