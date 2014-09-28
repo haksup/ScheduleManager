@@ -14,6 +14,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		
 		<org.springframework.version>4.0.4.RELEASE</org.springframework.version>
+		<org.springframework.security.version>3.2.4.RELEASE</org.springframework.security.version>
 		<org.slf4j.version>1.5.8</org.slf4j.version>
 		<org.codehaus.jackson.version>1.9.13</org.codehaus.jackson.version>
 	</properties>
@@ -179,6 +180,23 @@
 		</dependency>
 		<!-- jersey(S) -->
 		
+		<!-- spring security(S) -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${org.springframework.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${org.springframework.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${org.springframework.security.version}</version>
+		</dependency>
+		<!-- spring security(E) -->		
 	</dependencies>
   
 	<build>
