@@ -19,6 +19,18 @@
 		<org.codehaus.jackson.version>1.9.13</org.codehaus.jackson.version>
 	</properties>
 	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-framework-bom</artifactId>
+				<version>${org.springframework.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
 	<dependencies>
     	<dependency>
       		<groupId>junit</groupId>
@@ -40,61 +52,61 @@
 		</dependency>
     	<!-- apache commons(E) -->
     	
-    	<!-- spring framework(S) -->
+    	<!-- spring framework(S) - dependencyManagement 에서 버전 설정-->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
-			<version>${org.springframework.version}</version>
+<!-- 			<version>${org.springframework.version}</version> -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
-			<version>${org.springframework.version}</version>
+<!-- 			<version>${org.springframework.version}</version> -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>${org.springframework.version}</version>
+<!-- 			<version>${org.springframework.version}</version> -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
-			<version>${org.springframework.version}</version>
+<!-- 			<version>${org.springframework.version}</version> -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-			<version>${org.springframework.version}</version>
+<!-- 			<version>${org.springframework.version}</version> -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-expression</artifactId>
-			<version>${org.springframework.version}</version>
+<!-- 			<version>${org.springframework.version}</version> -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-oxm</artifactId>
-			<version>${org.springframework.version}</version>
+<!-- 			<version>${org.springframework.version}</version> -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<version>${org.springframework.version}</version>
+<!-- 			<version>${org.springframework.version}</version> -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
-			<version>${org.springframework.version}</version>
+<!-- 			<version>${org.springframework.version}</version> -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>${org.springframework.version}</version>
+<!-- 			<version>${org.springframework.version}</version> -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>${org.springframework.version}</version>
+<!-- 			<version>${org.springframework.version}</version> -->
 		</dependency>
 		<!-- spring framework(E) -->
 		
@@ -172,13 +184,13 @@
 		</dependency>
 		<!-- aspectj(E) -->
 		
-		<!-- jersey(S) -->
+		<!-- jersey(S) - rest support -->
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-client</artifactId>
 			<version>1.8</version>
 		</dependency>
-		<!-- jersey(S) -->
+		<!-- jersey(S) - rest support -->
 		
 		<!-- spring security(S) -->
 		<dependency>
