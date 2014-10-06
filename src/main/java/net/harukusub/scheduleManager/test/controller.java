@@ -8,6 +8,6 @@ public class controller {
 	
 	@RequestMapping("/view")
 	public String view(){
-		return "projectManage/projectFormRetrieve";
+		return "scheduleManage/scheduleList";
 	}
 }
