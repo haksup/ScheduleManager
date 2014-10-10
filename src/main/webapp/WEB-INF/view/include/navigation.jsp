@@ -12,10 +12,10 @@
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
-                <li><a class="active" href="index.html"> 사용자관리</a></li>
-                <li><a href="tables.html"> 프로젝트관리</a></li>
-                <li><a href="tables.html"> 권한관리</a></li>
-                <li><a href="tables.html"> 일정관리</a></li>
+                <li><a class="active" href="userList"> 사용자관리</a></li>
+                <li><a href="projectList"> 프로젝트관리</a></li>
+                <li><a href="authorityProjectList"> 권한관리</a></li>
+                <li><a href="scheduleProjectList"> 일정관리</a></li>
             </ul>
         </div>
     </div>

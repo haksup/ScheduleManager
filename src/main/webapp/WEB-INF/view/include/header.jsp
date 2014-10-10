@@ -16,12 +16,13 @@ function getContextPath(){
 
 <!-- bootstrap(S) -->
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/bootstrap.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/sb-admin-2.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/plugins/datatables/dataTables.bootstrap.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/plugins/datatables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/plugins/metisMenu/metisMenu.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/plugins/morris/morris-data.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/plugins/morris/morris.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/plugins/datatables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/plugins/datatables/dataTables.bootstrap.js"></script>
+<%-- <script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/plugins/morris/raphael.min.js"></script> --%>
+<%-- <script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/plugins/morris/morris.js"></script> --%>
+<%-- <script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/plugins/morris/morris-data.js"></script> --%>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/bootstrap/sb-admin-2.js"></script>
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/bootstrap/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/bootstrap/sb-admin-2.css" />
@@ -34,4 +35,9 @@ function getContextPath(){
 
 <!-- anqularJS(S) -->
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/angular/angular.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/angular/ngDialog.js"></script>
+
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/angular/ngDialog.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/angular/ngDialog-theme-default.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/angular/ngDialog-theme-plain.css" />
 <!-- anqularJS(E) -->
