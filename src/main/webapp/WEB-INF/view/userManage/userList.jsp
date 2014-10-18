@@ -12,7 +12,8 @@
 
 <!-- controller(S) -->
 <script type="text/javascript">
-	var app = angular.module('userListApp', ['ngDialog']);
+	// Application(S)
+	var app = angular.module('userListApp', ['ngDialog', 'userListApp.controller', 'userListApp.service']);
 	app.config(['ngDialogProvider', function (ngDialogProvider) {
 		ngDialogProvider.setDefaults({
 			className: 'ngdialog-theme-default',
@@ -20,20 +21,61 @@
 			showClose: true,
 			closeByDocument: true,
 			closeByEscape: true,
-			appendTo: false,
-			preCloseCallback: function () {
-				console.log('default pre-close callback');
-			}
+			appendTo: false
+// 			preCloseCallback: function () {
+// 				console.log('default pre-close callback');
+// 			}
 		});
 	}]);
-
-	app.controller('userListCtrl', ['$scope', 'ngDialog', function($scope, ngDialog){
-		$scope.showPopup = function(){
+	
+	// Application(E)
+	
+	// Controller(S)
+	var ctrl = angular.module('userListApp.controller', ['ngDialog', 'userListApp.service']);
+	ctrl.controller('userListCtrl', ['$scope', 'ngDialog', 'userQuery', 'userCreate'
+	                                 , function($scope, ngDialog, userQuery, userCreate){
+		//$scope.userList = userQuery.query();
+		//alert($scope.userList.userList);
+		
+		$scope.newUser = function(){
 			ngDialog.open({
-				template: 'userForm'
+				template: 'userForm',
+				controller: 'userListCtrl'
 			});
 		};
+		
+		$scope.userFormRetrievePopup = function(){
+			ngDialog.open({
+				template : 'userFormRetrieve',
+				controller: 'userListCtrl'
+			});
+		};
+		
+		$scope.userAdd = function(){
+			//$scope.userList = userQuery.query();
+			$scope.userList = userQuery.query();
+// 			userCreate.create();
+		}
 	}]);
+	// Controller(E)
+	
+	// Service(S)
+	var service = angular.module('userListApp.service', ['ngResource']);
+	
+	service.factory('userQuery', function($resource){
+		return $resource('/userManage/user/query',{},{
+			query : {method:'GET'}
+		})
+	});
+	
+	service.factory('userCreate', function($resource){
+		return $resource('/userManage/user/create',{},{
+			create	: {method:'POST'}
+		})
+	});
+
+	// Service(E)
+
 </script>
 <!-- controller(E) -->
 </head>
@@ -52,7 +94,7 @@
             </div>
 			<div class="row">
                 <div class="col-lg-12 text-right">
-                	<button type="button" class="btn btn-primary" ng-click="showPopup()">신규</button>
+                	<button type="button" class="btn btn-primary" ng-click="newUser()">신규</button>
                 </div>
             </div>
             <div class="row">
@@ -151,12 +193,12 @@
         </div>
         <div class="row">
             <div class="col-lg-12 text-center">
-              	<button type="button" class="btn btn-primary">저장</button>
-               	<button type="button" class="btn btn-primary">취소</button>
+              	<button id="btnSave" type="button" class="btn btn-primary" ng-click="userAdd()">저장</button>
+               	<button type="button" class="btn btn-primary" ng-click="closeThisDialog()">취소</button>
             </div>
         </div>
 	</div>
-</script>
+	</script>
 	
 </body>
 </html>

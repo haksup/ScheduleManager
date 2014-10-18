@@ -1,0 +1,33 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.harukusub.scheduleManager.userManage.dao.UserManageDao">
+	
+	<select id="userSelectList" parameterType="hashmap" resultType="hashmap">
+		SELECT /* userSelectList */
+			  USR_ID AS usrId
+			, PASSWORD AS password
+			, USR_NM AS usrNm
+			, PHONE1_1 AS phone1_1
+			, PHONE1_2 AS phone1_2
+			, PHONE1_3 AS phone1_3
+			, EMAIL AS email
+			, WRTR AS wrtr
+			, UPDTR AS updtr
+			, DATE_FORMAT(WRT_DT, '%Y-%m-%d') AS wrtDt
+			, DATE_FORMAT(UPD_DT, '%Y-%m-%d') AS updDt
+		FROM 
+			USERS
+		ORDER BY
+			USR_NM
+	</select>
+	
+	<select id="userSelectListCount" parameterType="hashmap" resultType="int">
+		SELECT	/* userSelectListCount */
+			COUNT(*) AS CNT
+		FROM
+			USERS
+	</select>
+	
+</mapper>

@@ -35,6 +35,8 @@ function getContextPath(){
 
 <!-- anqularJS(S) -->
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/angular/angular.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/angular/angular-resource.js"></script>
+<%-- <script type="text/javascript" src="<%=request.getContextPath()%>/js/angular/angular-route.js"></script> --%>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/angular/ngDialog.js"></script>
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/angular/ngDialog.css" />
