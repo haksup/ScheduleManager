@@ -3,12 +3,14 @@ package net.harukusub.scheduleManager.userManage.controller;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.ws.rs.GET;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import net.harukusub.scheduleManager.userManage.service.UserManageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,19 +27,44 @@ public class UserManageController {
 		return "userManage/userList";
 	}
 
-	@RequestMapping(value="/user/query}", method=RequestMethod.GET)
+	
+	@RequestMapping(value="/user/query", method=RequestMethod.GET)
 	@ResponseBody
-	public HashMap<String, Object> userSelectList(@RequestParam HashMap<String,Object> paramMap){
-		System.out.println("aaaa ");
+	public List<?> userSelectList(@RequestParam HashMap<String,Object> paramMap){
 		List<?> userList = userManageService.userSelectList(paramMap);
 		
-		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("userList", userList);
-		return resultMap;
+//		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+//		resultMap.put("userList", userList);
+
+		return userList;
 	}
 
 	@RequestMapping(value="/user/create", method=RequestMethod.POST)
-	public void userInsert(){
-		System.out.println("bbbb");
+	public void userInsert(HttpServletRequest request, HttpServletResponse response
+			, @RequestParam HashMap<String,Object> paramMap){
+		paramMap.put("wrtr", "user");
+		paramMap.put("updtr", "user");
+		userManageService.userInsert(paramMap);
 	}
+	
+	@RequestMapping(value="/user/show/{usrId}", method=RequestMethod.GET)
+	@ResponseBody
+	public HashMap<String, Object> userSelect(@PathVariable String usrId){
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("usrId", usrId);
+		HashMap<String, Object> resultMap = userManageService.userSelect(paramMap);
+		
+		//HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		return resultMap;
+	}
+	
+	@RequestMapping(value="/user/update", method=RequestMethod.PUT)
+	public void userUpdate(HttpServletRequest request, HttpServletResponse response
+			, @RequestParam HashMap<String,Object> paramMap){
+		System.out.println("aaaa " + paramMap);
+		paramMap.put("wrtr", "user");
+		paramMap.put("updtr", "user");
+		//userManageService.userInsert(paramMap);
+	}
+
 }
