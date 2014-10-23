@@ -32,10 +32,10 @@
 	
 	// Controller(S)
 	var ctrl = angular.module('userListApp.controller', ['ngDialog', 'userListApp.service']);
-	ctrl.controller('userListCtrl', ['$scope', 'ngDialog', 'userQuery', 'userCreate', 'userShow', 'userUpdate'
-	                                 , function($scope, ngDialog, userQuery, userCreate, userShow, userUpdate){
+	ctrl.controller('userListCtrl', ['$scope', 'ngDialog', 'userQuery', 'userCreate', 'userShow', 'userUpdate', 'userDelete'
+	                                 , function($scope, ngDialog, userQuery, userCreate, userShow, userUpdate, userDelete){
 		$scope.userList = userQuery.query();
-		
+		console.dir($scope.userList);
 		// 사용자 신규 팝업
 		$scope.newUserFormPopup = function(){
 			ngDialog.open({
@@ -46,7 +46,19 @@
 		
 		// 사용자 팝업 저장
 		$scope.userCreate = function(){
-			userCreate.create($.param($scope.user));
+			userCreate.create(
+				$.param($scope.user),
+				function success(value){
+					alert("저장되었습니다.");
+					ngDialog.close();
+					$scope.userList = userQuery.query();
+					$scope.userList.push($scope.userList);
+					console.dir($scope.userList);
+				},
+				function error(error){
+					console.log("error");
+				}
+			);
 		};
 		
 		// 사용자 list 선택
@@ -56,7 +68,15 @@
 		
 		// 사용자 정보 팝업
 		$scope.userFormRetrievePopup = function(usrId){
-			$scope.user = userShow.show({usrId : usrId});
+			$scope.user = userShow.show(
+					{usrId : usrId} ,
+					function success(value){
+						console.log("success");
+					},
+					function error(error){
+						console.log("error");
+					}
+			);
 			
 			ngDialog.open({
 				template : 'userFormRetrieve',
@@ -67,8 +87,7 @@
 		// 사용자 수정 팝업
 		$scope.userUpdatePopup = function(){
 			$scope.user = userShow.show({usrId : $scope.user.usrId});
-			$scope.user.up = true;
-			
+
 			ngDialog.close();
 			ngDialog.open({
 				template : 'userForm',
@@ -78,10 +97,22 @@
 		
 		// 사용자 정보 수정
 		$scope.userUpdate = function(){
-			console.dir($scope.user);
-			//console.log("bbbb" + $.param($scope.user));
-			//userUpdate.update($.param($scope.user));
+			$scope.updateInfo = {};
+			$scope.updateInfo.usrId = $scope.user.usrId;
+			$scope.updateInfo.password = $scope.user.password;
+			$scope.updateInfo.usrNm = $scope.user.usrNm;
+			$scope.updateInfo.phone1_1 = $scope.user.phone1_1;
+			$scope.updateInfo.phone1_2 = $scope.user.phone1_2;
+			$scope.updateInfo.phone1_3 = $scope.user.phone1_3;
+			$scope.updateInfo.email = $scope.user.email;
+			
+			userUpdate.update($.param($scope.updateInfo));
 		};
+		
+		// 사용자 정보 삭제
+		$scope.userDelete = function(){
+			userDelete.remove({usrId : $scope.user.usrId});
+		}
 		
 	}]);
 	// Controller(E)
@@ -119,16 +150,28 @@
 	// 사용자 정보
 	service.factory('userShow', function($resource){ 
  		return $resource('/userManage/user/show/:usrId',{},{ 
- 			show : {method:'GET'} 
+ 			show : {
+ 				method:'GET', 
+ 				transformResponse: function(data, headers){
+                	return angular.fromJson(data);
+            	}
+ 			}
  		})
  	});
 	
 	// 사용자 수정
 	service.factory('userUpdate', function($resource){ 
  		return $resource('/userManage/user/update',{},{ 
- 			update : {method:'PUT', headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}} 
+ 			update : {method:'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}} 
  		})
  	});
+	
+	// 사용자 삭제
+	service.factory('userDelete', function($resource){
+		return $resource('/userManage/user/delete/:usrId',{},{ 
+ 			remove : {method:'DELETE'} 
+ 		})
+	});
 
 	// Service(E)
 
@@ -200,7 +243,14 @@
 	                    <tbody>
 	                        <tr>
 	                            <td>아이디</td>
-	                            <td><input class="form-control" ng-model="user.usrId"></td>
+	                            <td>
+									<span ng-show="user.wrtr == undefined">
+              							<input class="form-control" ng-model="user.usrId">
+									</span>
+									<span ng-show="user.wrtr != undefined">
+										{{user.usrId}}
+									</span>
+								</td>
 	                        </tr>
 	                        <tr>
 	                            <td>비밀번호</td>
@@ -302,6 +352,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
               	<button id="btnSave" type="button" class="btn btn-primary" ng-click="userUpdatePopup()">수정</button>
+              	<button id="btnSave" type="button" class="btn btn-primary" ng-click="userDelete()">삭제</button>
                	<button type="button" class="btn btn-primary" ng-click="closeThisDialog()">취소</button>
             </div>
         </div>

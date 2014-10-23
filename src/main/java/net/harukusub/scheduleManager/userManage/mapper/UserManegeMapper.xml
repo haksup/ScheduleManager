@@ -78,4 +78,24 @@
 		)
 	</insert>
 	
+	<update id="userUpdate" parameterType="hashmap">
+		UPDATE
+			USERS
+		SET
+			PASSWORD = #{password}
+			, USR_NM = #{usrNm}
+			, PHONE1_1 = #{phone1_1} 
+			, PHONE1_2 = #{phone1_2}
+			, PHONE1_3 = #{phone1_3}
+			, EMAIL = #{email}
+			, UPDTR = #{updtr}
+			, UPD_DT = CURRENT_TIMESTAMP
+		WHERE
+			USR_ID = #{usrId}
+	</update>
+	
+	<delete id="userDelete" parameterType="hashmap">
+		DELETE FROM USERS WHERE USR_ID = #{usrId}
+	</delete>
+	
 </mapper>

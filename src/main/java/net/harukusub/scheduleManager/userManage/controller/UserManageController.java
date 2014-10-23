@@ -1,5 +1,6 @@
 package net.harukusub.scheduleManager.userManage.controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 
@@ -54,17 +55,22 @@ public class UserManageController {
 		paramMap.put("usrId", usrId);
 		HashMap<String, Object> resultMap = userManageService.userSelect(paramMap);
 		
-		//HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		return resultMap;
 	}
 	
-	@RequestMapping(value="/user/update", method=RequestMethod.PUT)
+	@RequestMapping(value="/user/update", method=RequestMethod.POST)
 	public void userUpdate(HttpServletRequest request, HttpServletResponse response
 			, @RequestParam HashMap<String,Object> paramMap){
-		System.out.println("aaaa " + paramMap);
-		paramMap.put("wrtr", "user");
-		paramMap.put("updtr", "user");
-		//userManageService.userInsert(paramMap);
+		paramMap.put("updtr", "updater");
+		userManageService.userUpdate(paramMap);
 	}
 
+	@RequestMapping(value="/user/delete/{usrId}", method=RequestMethod.DELETE)
+	@ResponseBody
+	public void userDelete(@PathVariable String usrId){
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("usrId", usrId);
+		userManageService.userDelete(paramMap);
+		
+	}
 }

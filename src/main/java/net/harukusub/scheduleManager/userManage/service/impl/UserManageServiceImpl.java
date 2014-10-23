@@ -30,4 +30,13 @@ public class UserManageServiceImpl implements UserManageService {
 		return userManageDao.userSelect(paramMap);
 	}
 	
+	@Override
+	public int userUpdate(HashMap<String, Object> paramMap) {
+		return userManageDao.userUpdate(paramMap);
+	}
+
+	@Override
+	public int userDelete(HashMap<String, Object> paramMap) {
+		return userManageDao.userDelete(paramMap);
+	}
 }
