@@ -32,10 +32,10 @@
 	
 	// Controller(S)
 	var ctrl = angular.module('userListApp.controller', ['ngDialog', 'userListApp.service']);
-	ctrl.controller('userListCtrl', ['$scope', 'ngDialog', 'userQuery', 'userCreate', 'userShow', 'userUpdate', 'userDelete'
-	                                 , function($scope, ngDialog, userQuery, userCreate, userShow, userUpdate, userDelete){
+	ctrl.controller('userListCtrl', ['$scope', 'ngDialog', 'userQuery', 'userCreate', 'userShow', 'userUpdate', 'userDelete', '$http'
+	                                 , function($scope, ngDialog, userQuery, userCreate, userShow, userUpdate, userDelete, $http){
 		$scope.userList = userQuery.query();
-		console.dir($scope.userList);
+
 		// 사용자 신규 팝업
 		$scope.newUserFormPopup = function(){
 			ngDialog.open({
@@ -51,9 +51,8 @@
 				function success(value){
 					alert("저장되었습니다.");
 					ngDialog.close();
+
 					$scope.userList = userQuery.query();
-					$scope.userList.push($scope.userList);
-					console.dir($scope.userList);
 				},
 				function error(error){
 					console.log("error");
@@ -162,7 +161,7 @@
 	// 사용자 수정
 	service.factory('userUpdate', function($resource){ 
  		return $resource('/userManage/user/update',{},{ 
- 			update : {method:'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}} 
+ 			update : {method:'put', headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'}} 
  		})
  	});
 	

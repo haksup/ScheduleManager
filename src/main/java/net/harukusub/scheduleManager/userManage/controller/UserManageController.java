@@ -58,10 +58,12 @@ public class UserManageController {
 		return resultMap;
 	}
 	
-	@RequestMapping(value="/user/update", method=RequestMethod.POST)
+	@RequestMapping(value="/user/update", method=RequestMethod.PUT)
 	public void userUpdate(HttpServletRequest request, HttpServletResponse response
 			, @RequestParam HashMap<String,Object> paramMap){
+		System.out.println("aaaa");
 		paramMap.put("updtr", "updater");
+		System.out.println("aaaa " + paramMap);
 		userManageService.userUpdate(paramMap);
 	}
 

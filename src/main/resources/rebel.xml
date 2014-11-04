@@ -4,6 +4,8 @@
 	<classpath>
 		<dir name="${rebel.workspace.path}/ScheduleManager/target/classes">
 		</dir>
+		<dir name="${rebel.workspace.path}/ScheduleManager/target/test-classes">
+		</dir>
 	</classpath>
 
 	<web>
